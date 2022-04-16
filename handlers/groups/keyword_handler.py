@@ -1,11 +1,15 @@
+from cgitb import text
 from loader import dp
 from filters import IsGroup
 from keyboards.inline import btns
 
 from aiogram import types
+from aiogram.dispatcher.filters import Text
 from time import sleep
 
 
+@dp.message_handler(IsGroup(), Text(equals="ban", ignore_case=True))
+@dp.message_handler(IsGroup(), Text(contains="banof", ignore_case=True))
 @dp.message_handler(IsGroup(), commands=['ban', 'banof', 'kick', 'kickof', 'banofuz'])
 async def ban_handler(message: types.Message):
     if message.reply_to_message:
