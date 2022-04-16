@@ -1,5 +1,6 @@
 from loader import dp
 from filters import IsGroup
+from keyboards.inline import btns
 
 from aiogram import types
 from time import sleep
@@ -15,7 +16,7 @@ async def ban_handler(message: types.Message):
             await message.delete()
         else:
             matn = f"<b><a href='tg://user?id={message.from_user.id}'>{message.from_user.full_name}</a></b> guruhimiz azosi bo'lgan <b> <a href='tg://user?id={message.reply_to_message.from_user.id}'>{message.reply_to_message.from_user.full_name}</a></b> foydalanuvchi ban qilmoqchi. \n\n<b>Rozimisiz?</b>\n\n<b>"
-            await message.answer(matn)
+            await message.answer(matn, reply_markup=btns(message.from_user.id, message.reply_to_message.from_user.id))
     else:
         msg = message.answer("xabarga javob bering")
         await message.delete()
